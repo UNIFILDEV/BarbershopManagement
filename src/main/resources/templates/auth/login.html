@@ -1,1 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layouts/application :: layout (~{::title}, ~{::section})">
 
+<title>Login - ERP Barbearia</title>
+
+<section>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow mt-5">
+                    <div class="card-header text-center bg-dark text-white">
+                        <h3><i class="fas fa-cut me-2"></i>ERP Barbearia</h3>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/login}" method="post">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="username" name="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="password" name="password" required>
+                            </div>
+                            <button type="submit" class="btn btn-dark w-100">
+                                <i class="fas fa-sign-in-alt me-2"></i>Entrar
+                            </button>
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <a href="/register" class="text-decoration-none">Não tem conta? Cadastre-se</a>
+                        </div>
+
+                        <div th:if="${param.error}" class="alert alert-danger mt-3">
+                            Email ou senha inválidos.
+                        </div>
+                        <div th:if="${param.logout}" class="alert alert-info mt-3">
+                            Você foi desconectado.
+                        </div>
+                        <div th:if="${param.registered}" class="alert alert-success mt-3">
+                            Cadastro realizado com sucesso! Faça login.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</html>
+<style>
+    body {
+        background: linear-gradient(135deg, #6c757d 0%, #0d1b2a 100%);
+        min-height: 100vh;
+    }
+</style>

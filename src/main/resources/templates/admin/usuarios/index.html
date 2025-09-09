@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="layouts/application :: layout(~{::title}, ~{::section})">
+
+    <title>Lista de Usuários - ERP Barbearia</title>
+
+    <section>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1>Usuários</h1>
+            <a href="/admin/usuarios/novo" class="btn btn-primary">
+                <i class="fas fa-user-plus me-1"></i> Novo Usuário
+            </a>
+        </div>
+
+        <div th:replace="admin/usuarios/collection :: collection"></div>
+    </section>
+
+</th:block>
+</html>

@@ -1,1 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Funcionário - ERP Barbearia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/dashboard">
+            <i class="fas fa-cut me-2"></i>ERP Barbearia - Funcionário
+        </a>
+        <div class="navbar-nav ms-auto">
+                <span class="navbar-text me-3" th:if="${funcionario}">
+                    Olá, <span th:text="${funcionario.nome}">Funcionário</span>!
+                </span>
+            <a class="nav-link" href="/logout">
+                <i class="fas fa-sign-out-alt me-1"></i>Sair
+            </a>
+        </div>
+    </div>
+</nav>
 
+<div class="container mt-4">
+    <h2><i class="fas fa-calendar-check me-2"></i>Minha Agenda</h2>
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <h5><i class="fas fa-clock me-2"></i>Agendamentos Alocados</h5>
+        </div>
+        <div class="card-body">
+            <div th:if="${alocacoes != null and !alocacoes.empty}">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Serviço</th>
+                            <th>Início</th>
+                            <th>Fim</th>
+                            <th>Status</th>
+                            <th>Observações</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="alocacao : ${alocacoes}">
+                            <td th:text="${alocacao.agendamento.cliente.nome}">João Silva</td>
+                            <td th:text="${alocacao.agendamento.servico.nome}">Corte</td>
+                            <td th:text="${#temporals.format(alocacao.inicioAlocacao, 'dd/MM/yyyy HH:mm')}">10/12/2024 10:00</td>
+                            <td th:text="${#temporals.format(alocacao.fimAlocacao, 'dd/MM/yyyy HH:mm')}">10/12/2024 10:30</td>
+                            <td>
+                                        <span th:class="${alocacao.agendamento.status == 'AGENDADO' ? 'badge bg-warning' : 
+                                                       alocacao.agendamento.status == 'CONCLUIDO' ? 'badge bg-success' : 'badge bg-danger'}"
+                                              th:text="${alocacao.agendamento.status}">AGENDADO</span>
+                            </td>
+                            <td th:text="${alocacao.agendamento.observacoes ?: '-'}">-</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div th:if="${alocacoes == null or alocacoes.empty}" class="text-center text-muted">
+                <i class="fas fa-calendar-times fa-3x mb-3"></i>
+                <p>Você não possui agendamentos alocados no momento.</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

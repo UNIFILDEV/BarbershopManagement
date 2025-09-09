@@ -1,1 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layouts/application :: layout (~{::title}, ~{::section})">
 
+<title>Cadastro - ERP Barbearia</title>
+
+<section>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow mt-5">
+                    <div class="card-header text-center bg-dark text-white">
+                        <h3><i class="fas fa-user-plus me-2"></i>Cadastro de Cliente</h3>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/register}" th:object="${usuario}" method="post">
+                            <div class="mb-3">
+                                <label for="nome" class="form-label">Nome</label>
+                                <input type="text" class="form-control" id="nome" th:field="*{nome}" required>
+                                <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" th:field="*{email}" required>
+                                <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></div>
+                                <div th:if="${emailError}" class="text-danger" th:text="${emailError}"></div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="telefone" class="form-label">Telefone</label>
+                                <input type="text" class="form-control" id="telefone" th:field="*{telefone}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="senha" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="senha" th:field="*{senha}" required>
+                                <div th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" class="text-danger"></div>
+                            </div>
+                            <button type="submit" class="btn btn-dark w-100">
+                                <i class="fas fa-user-plus me-2"></i>Cadastrar
+                            </button>
+                        </form>
+                        <hr>
+                        <div class="text-center">
+                            <a href="/login" class="text-decoration-none">Já tem conta? Faça login</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+</html>
+<style>
+    body {
+        background: linear-gradient(135deg, #6c757d 0%, #0d1b2a 100%);
+        min-height: 100vh;
+    }
+</style>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="layouts/application :: layout (~{::title}, ~{::section})">
+<head>
+    <title th:text="'Usuário ' + ${usuario.nome}"></title>
+</head>
+<body>
+<section>
+    <h1 th:text="${usuario.nome}"></h1>
+    <p>Email: <span th:text="${usuario.email}"></span></p>
+    <p>Tipo: <span th:text="${usuario.tipoUsuario}"></span></p>
+
+    <a th:href="@{/admin/usuarios}">Voltar</a>
+</section>
+</body>
+</html>

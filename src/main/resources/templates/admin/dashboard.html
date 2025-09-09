@@ -1,1 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR">
+<th:block th:replace="layouts/application :: layout(~{::title}, ~{::section})">
 
+    <title>Dashboard - ERP Barbearia</title>
+
+    <section>
+        <h2><i class="fas fa-tachometer-alt me-2"></i>Dashboard Administrativo</h2>
+
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card text-white bg-primary">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4 th:text="${totalUsuarios}">0</h4>
+                                <p class="card-text">Usuários</p>
+                            </div>
+                            <i class="fas fa-users fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-success">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4 th:text="${totalServicos}">0</h4>
+                                <p class="card-text">Serviços</p>
+                            </div>
+                            <i class="fas fa-cut fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-white bg-warning">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h4 th:text="${totalAgendamentos}">0</h4>
+                                <p class="card-text">Agendamentos</p>
+                            </div>
+                            <i class="fas fa-calendar fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5><i class="fas fa-cog me-2"></i>Menu Administrativo</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <a href="/admin/usuarios" class="btn btn-outline-primary w-100">
+                                    <i class="fas fa-users me-2"></i>Gerenciar Usuários
+                                </a>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <a href="/admin/servicos" class="btn btn-outline-success w-100">
+                                    <i class="fas fa-cut me-2"></i>Gerenciar Serviços
+                                </a>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <a href="/admin/agendamentos" class="btn btn-outline-warning w-100">
+                                    <i class="fas fa-calendar me-2"></i>Gerenciar Agendamentos
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</th:block>
+</html>

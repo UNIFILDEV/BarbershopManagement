@@ -1,0 +1,13 @@
+INSERT INTO usuarios (id, nome, email, senha, tipo_usuario, telefone) VALUES
+    (1, 'Administrador', 'admin@barbearia.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2uheWG/igi.', 'ADMIN', '(11) 99999-9999');
+
+INSERT INTO servicos (id, nome, descricao, preco, duracao_minutos, ativo) VALUES
+                                                                              (1, 'Corte Masculino', 'Corte tradicional masculino', 25.00, 30, true),
+                                                                              (2, 'Barba', 'Aparar e modelar barba', 15.00, 20, true),
+                                                                              (3, 'Corte + Barba', 'Combo corte e barba', 35.00, 45, true),
+                                                                              (4, 'Sobrancelha', 'Limpeza de sobrancelha', 10.00, 15, true);
+
+INSERT INTO funcionarios (id, especialidade, ativo) VALUES
+    (1, 'Cortes e Barbas', true);
+
+-- Senha padrão: "123456"
