@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layouts/application :: layout(~{::title}, ~{::section})}">
+<head>
+    <title th:text="'Serviço - ' + ${servico.nome}">Serviço</title>
+</head>
+<body>
+<section>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 th:text="${servico.nome}">Nome do Serviço</h2>
+        <div class="d-flex justify-content-start gap-2">
+            <a th:href="@{'/admin/servicos'}" class="btn btn-secondary"><i class="fas fa-arrow-left me-1"></i>Voltar</a>
+            <a th:href="@{'/admin/servicos/editar/' + ${servico.id}}" class="btn btn-primary"><i class="fas fa-pen me-1"></i>Editar</a>
+            <a th:href="@{'/admin/servicos/deletar/' + ${servico.id}}" onclick="return confirm('Tem certeza que deseja deletar este serviço?')" class="btn btn-danger">
+                <i class="fas fa-trash me-1"></i>Deletar
+            </a>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-body">
+            <p><strong>Descrição:</strong> <span th:text="${servico.descricao != null ? servico.descricao : '---'}"></span></p>
+            <p><strong>Preço:</strong> R$ <span th:text="${servico.preco}"></span></p>
+            <p><strong>Duração (minutos):</strong> <span th:text="${servico.duracaoMinutos}"></span></p>
+            <p><strong>Ativo:</strong>
+                <span th:text="${servico.ativo} ? 'Sim' : 'Não'"></span>
+            </p>
+        </div>
+    </div>
+</section>
+</body>
+</html>

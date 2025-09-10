@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="layouts/application :: layout(~{::title}, ~{::section})">
+
+    <title>Serviços - ERP Barbearia</title>
+
+    <section>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1>Serviços</h1>
+            <a href="/admin/servicos/novo" class="btn btn-success">
+                <i class="fas fa-user-plus me-1"></i> Novo Servico
+            </a>
+        </div>
+
+        <div th:replace="admin/servicos/collection :: collection"></div>
+    </section>
+</th:block>
+</html>

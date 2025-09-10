@@ -1,0 +1,31 @@
+<div th:fragment="collection">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Duração</th>
+            <th>Ativo</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="s : ${servicos}">
+            <td th:text="${s.id}"></td>
+            <td th:text="${s.nome}"></td>
+            <td th:text="${s.descricao}"></td>
+            <td th:text="${s.preco}"></td>
+            <td th:text="${s.duracaoMinutos} + ' min'"></td>
+            <td th:text="${s.ativo}"></td>
+            <td class="text-center">
+                <a th:href="@{'/admin/servicos/' + ${s.id}}" title="Ver" class="text-dark mx-2"><i class="fas fa-eye"></i></a>
+                <a th:href="@{'/admin/servicos/editar/' + ${s.id}}" title="Editar" class="text-dark mx-2"><i class="fas fa-pen"></i></a>
+                <a th:href="@{'/admin/servicos/deletar/' + ${s.id}}"
+                   onclick="return confirm('Tem certeza que deseja deletar este serviço?')" title="Deletar" class="text-dark mx-2"><i class="fas fa-trash"></i></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

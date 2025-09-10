@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="layouts/application :: layout(~{::title}, ~{::section})">
+    <title th:text="${servico.id} != null ? 'Editar Serviço' : 'Novo Serviço'">Formulário de Serviço</title>
+    <section>
+        <h2 th:text="${servico.id} != null ? 'Editar Serviço' : 'Novo Serviço'"></h2>
+        <form th:action="${servico.id} != null ? @{/admin/servicos/{id}(id=${servico.id})} : @{/admin/servicos}"
+              th:object="${servico}" method="post">
+
+            <div class="mb-3">
+                <label>Nome</label>
+                <input type="text" th:field="*{nome}" class="form-control" required>
+                <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger"></div>
+            </div>
+
+            <div class="mb-3">
+                <label>Descrição</label>
+                <textarea th:field="*{descricao}" class="form-control"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label>Preço</label>
+                <input type="number" step="0.01" th:field="*{preco}" class="form-control" required>
+                <div th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}" class="text-danger"></div>
+            </div>
+
+            <div class="mb-3">
+                <label>Duração (minutos)</label>
+                <input type="number" th:field="*{duracaoMinutos}" class="form-control" required>
+                <div th:if="${#fields.hasErrors('duracaoMinutos')}" th:errors="*{duracaoMinutos}" class="text-danger"></div>
+            </div>
+
+            <div class="mb-3 form-check">
+                <input type="checkbox" th:field="*{ativo}" class="form-check-input">
+                <label class="form-check-label">Ativo</label>
+            </div>
+
+            <button type="submit" class="btn btn-dark">Salvar</button>
+        </form>
+    </section>
+</th:block>
+</html>
