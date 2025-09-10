@@ -46,6 +46,7 @@ public class UsuarioService implements UserDetailsService {
                 .build();
     }
 
+    // Criação
     public Usuario salvarUsuario(Usuario usuario) {
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
 
@@ -67,6 +68,24 @@ public class UsuarioService implements UserDetailsService {
 
         return usuarioRepository.save(usuario);
     }
+
+    // Edição
+    public Usuario atualizarUsuario(Long id, Usuario usuarioAtualizado) {
+        Usuario usuarioExistente = buscarPorId(id);
+        if (usuarioExistente == null) return null;
+
+        usuarioExistente.setNome(usuarioAtualizado.getNome());
+        usuarioExistente.setEmail(usuarioAtualizado.getEmail());
+        usuarioExistente.setTelefone(usuarioAtualizado.getTelefone());
+        usuarioExistente.setTipoUsuario(usuarioAtualizado.getTipoUsuario());
+
+        if (usuarioAtualizado.getSenha() != null && !usuarioAtualizado.getSenha().isBlank()) {
+            usuarioExistente.setSenha(passwordEncoder.encode(usuarioAtualizado.getSenha()));
+        }
+
+        return usuarioRepository.save(usuarioExistente);
+    }
+
 
     public boolean emailJaExiste(String email) {
         return usuarioRepository.existsByEmail(email);

@@ -18,7 +18,6 @@ public class Funcionario extends Usuario {
         setTipoUsuario(com.barbershop.erp.model.enums.TipoUsuario.FUNCIONARIO);
     }
 
-    // Getters e os Setters
     public String getEspecialidade() { return especialidade; }
     public void setEspecialidade(String especialidade) { this.especialidade = especialidade; }
 
@@ -27,4 +26,14 @@ public class Funcionario extends Usuario {
 
     public List<AlocacaoAgendamento> getAlocacoes() { return alocacoes; }
     public void setAlocacoes(List<AlocacaoAgendamento> alocacoes) { this.alocacoes = alocacoes; }
+
+    @Override
+    public String getNome() {
+        return super.getNome();
+    }
+
+    @Override
+    public void setNome(String nome) {
+        super.setNome(nome);
+    }
 }

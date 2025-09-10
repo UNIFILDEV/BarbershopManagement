@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      th:replace="layouts/application :: layout (~{::title}, ~{::section})">
+      th:replace="~{layouts/application :: layout (~{::title}, ~{::section})}">
 <head>
     <title>Formulário de Usuário</title>
 </head>
 <body>
 <section>
     <h1>Formulário de Usuário</h1>
-
-    <form th:action="@{/admin/usuarios/salvar}" th:object="${usuario}" method="post">
+    <form th:action="${usuario.id} != null ? @{/admin/usuarios/{id}(id=${usuario.id})} : @{/admin/usuarios}"
+          th:object="${usuario}" method="post">
+        <input type="hidden" name="_method" th:value="${usuario.id} != null ? 'put' : 'post'" />
 
         <div class="mb-3">
             <label for="nome">Nome:</label>
@@ -26,10 +27,9 @@
 
         <div class="mb-3">
             <label for="senha">Senha:</label>
-            <input type="password" id="senha" th:field="*{senha}" class="form-control" required>
+            <input type="password" id="senha" th:field="*{senha}" class="form-control" placeholder="Preencha apenas se quiser alterar">
             <div th:if="${#fields.hasErrors('senha')}" th:errors="*{senha}" class="text-danger"></div>
         </div>
-
         <div class="mb-3">
             <label for="tipoUsuario">Tipo de Usuário:</label>
             <select id="tipoUsuario" th:field="*{tipoUsuario}" class="form-select" required>
