@@ -45,7 +45,7 @@ Sistema de gerenciamento para barbearias desenvolvido em Java Spring Boot com ar
     - Password: barbearia
 
 ## Usuário Padrão
-- **Admin**: admin@barbearia.com / adimin123
+- **Admin**: admin@barbearia.com / admin123
 
 ## Estrutura do Banco de Dados
 - usuarios (classe base)
