@@ -4,6 +4,7 @@ import com.barbershop.erp.model.Cliente;
 import com.barbershop.erp.model.Usuario;
 import com.barbershop.erp.repository.UsuarioRepository;
 import com.barbershop.erp.service.AgendamentoService;
+import com.barbershop.erp.service.ServicoService;
 import com.barbershop.erp.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -22,6 +23,9 @@ public class AuthController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private ServicoService servicoService;
 
     @Autowired
     private AgendamentoService agendamentoService;
@@ -71,6 +75,8 @@ public class AuthController {
         switch (role) {
             case "ROLE_ADMIN":
                 model.addAttribute("totalUsuarios", usuarioService.listarTodos().size());
+                model.addAttribute("totalServicos", servicoService.listarAtivos().size());
+                model.addAttribute("totalAgendamentos", agendamentoService.listarTodos().size());
                 return "admin/dashboard";
             case "ROLE_FUNCIONARIO":
                 return "funcionario/dashboard";
