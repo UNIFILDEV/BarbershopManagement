@@ -21,7 +21,6 @@ public class AlocacaoAgendamento {
     private LocalDateTime inicioAlocacao;
     private LocalDateTime fimAlocacao;
 
-    // Construtores
     public AlocacaoAgendamento() {}
 
     public AlocacaoAgendamento(Agendamento agendamento, Funcionario funcionario,

@@ -19,9 +19,8 @@ public class Agendamento {
     @JoinColumn(name = "servico_id")
     private Servico servico;
 
-    // Adicione a referência ao Profissional
     @ManyToOne
-    @JoinColumn(name = "profissional_id") // Use o nome da coluna da chave estrangeira
+    @JoinColumn(name = "profissional_id")
     private Funcionario funcionario;
 
     private LocalDateTime dataHora;
@@ -33,7 +32,6 @@ public class Agendamento {
     @OneToMany(mappedBy = "agendamento", cascade = CascadeType.ALL)
     private List<AlocacaoAgendamento> alocacoes;
 
-    // Construtores
     public Agendamento() {}
 
     // Getters e Setters
@@ -46,7 +44,6 @@ public class Agendamento {
     public Servico getServico() { return servico; }
     public void setServico(Servico servico) { this.servico = servico; }
 
-    // Adicione os getters e setters para o Profissional
     public Funcionario getFuncionario() { return funcionario; }
     public void setFuncionario(Funcionario profissional) { this.funcionario = profissional; }
 

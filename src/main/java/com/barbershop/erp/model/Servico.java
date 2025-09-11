@@ -28,7 +28,6 @@ public class Servico {
 
     private boolean ativo = true;
 
-    // Construtores
     public Servico() {}
 
     public Servico(String nome, String descricao, BigDecimal preco, Integer duracaoMinutos) {

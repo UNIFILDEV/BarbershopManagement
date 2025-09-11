@@ -32,7 +32,6 @@ public class Usuario {
 
     private String telefone;
 
-    // Construtores
     public Usuario() {}
 
     public Usuario(String nome, String email, String senha, TipoUsuario tipoUsuario) {
