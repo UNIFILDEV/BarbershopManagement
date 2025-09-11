@@ -14,25 +14,4 @@ import java.util.List;
 @RequestMapping("/funcionario")
 public class FuncionarioController {
 
-    @Autowired
-    private AlocacaoService alocacaoService;
-
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
-    @GetMapping("/dashboard")
-    public String dashboard(Model model, Authentication authentication) {
-        String email = authentication.getName();
-        Usuario usuario = usuarioRepository.findByEmail(email).orElse(null);
-
-        if (usuario instanceof Funcionario) {
-            Funcionario funcionario = (Funcionario) usuario;
-            List<AlocacaoAgendamento> alocacoes = alocacaoService.listarPorFuncionario(funcionario);
-
-            model.addAttribute("funcionario", funcionario);
-            model.addAttribute("alocacoes", alocacoes);
-        }
-
-        return "funcionario/dashboard";
-    }
 }

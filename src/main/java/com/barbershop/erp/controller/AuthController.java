@@ -1,9 +1,13 @@
 package com.barbershop.erp.controller;
 
+import com.barbershop.erp.model.AlocacaoAgendamento;
 import com.barbershop.erp.model.Cliente;
+import com.barbershop.erp.model.Funcionario;
 import com.barbershop.erp.model.Usuario;
+import com.barbershop.erp.repository.AlocacaoAgendamentoRepository;
 import com.barbershop.erp.repository.UsuarioRepository;
 import com.barbershop.erp.service.AgendamentoService;
+import com.barbershop.erp.service.AlocacaoService;
 import com.barbershop.erp.service.ServicoService;
 import com.barbershop.erp.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +33,9 @@ public class AuthController {
 
     @Autowired
     private AgendamentoService agendamentoService;
+
+    @Autowired
+    private AlocacaoService alocacaoService;
 
     @GetMapping("/login")
     public String login(Model model) {
@@ -79,6 +86,12 @@ public class AuthController {
                 model.addAttribute("totalAgendamentos", agendamentoService.listarTodos().size());
                 return "admin/dashboard";
             case "ROLE_FUNCIONARIO":
+                if (usuario instanceof Funcionario) {
+                    Funcionario funcionario = (Funcionario) usuario;
+                    List<AlocacaoAgendamento> alocacoes = alocacaoService.listarPorFuncionario(funcionario);
+                    model.addAttribute("funcionario", funcionario);
+                    model.addAttribute("alocacoes", alocacoes);
+                }
                 return "funcionario/dashboard";
             case "ROLE_CLIENTE":
                 if (usuario instanceof Cliente cliente) {

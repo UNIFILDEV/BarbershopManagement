@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:file:./data/barbearia
     driverClassName: org.h2.Driver
     username: barbearia
     password: barbearia
@@ -8,7 +8,7 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: create-drop  # ou 'update' para manter dados
+      ddl-auto: update  # Alterado de 'create-drop' para 'update'
       format_sql: true
     show-sql: true
     properties:

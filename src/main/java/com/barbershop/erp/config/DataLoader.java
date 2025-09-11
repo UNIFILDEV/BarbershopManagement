@@ -36,6 +36,15 @@ public class DataLoader implements CommandLineRunner {
 
             System.out.println("\n=== CRIANDO DADOS INICIAIS ===");
 
+            // ========== CRIAR USUÁRIO CLIENTE ==========
+            Cliente cliente = new Cliente();
+            cliente.setNome("Cliente");
+            cliente.setEmail("cliente@barbearia.com");
+            cliente.setSenha(passwordEncoder.encode("123456"));
+            cliente.setTipoUsuario(TipoUsuario.CLIENTE);
+            cliente.setTelefone("(11) 99999-0000");
+            usuarioRepository.save(cliente);
+
             // ========== CRIAR USUÁRIO ADMIN ==========
             Usuario admin = new Usuario();
             admin.setNome("Administrador");
@@ -96,6 +105,7 @@ public class DataLoader implements CommandLineRunner {
             System.out.println("👑 Admin: admin@barbearia.com / admin123");
             System.out.println("👨‍💼 Funcionário 1: primeiro@barbearia.com / 123456");
             System.out.println("👨‍💼 Funcionário 2: segundo@barbearia.com / 123456");
+            System.out.println("Cliente: cliente@barbearia.com / 123456");
             System.out.println("===============================================\n");
         }
     }
