@@ -102,6 +102,6 @@ public class ClienteController {
     @PostMapping("/agendamentos/cancelar/{id}")
     public String cancelarAgendamento(@PathVariable Long id) {
         agendamentoService.cancelarAgendamento(id);
-        return "redirect:/cliente/agendamentos/index";
+        return "redirect:/dashboard?success=teste";
     }
 }
