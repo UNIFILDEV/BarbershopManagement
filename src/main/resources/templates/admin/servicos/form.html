@@ -3,7 +3,10 @@
 <th:block th:replace="layouts/application :: layout(~{::title}, ~{::section})">
     <title th:text="${servico.id} != null ? 'Editar Serviço' : 'Novo Serviço'">Formulário de Serviço</title>
     <section>
-        <h2 th:text="${servico.id} != null ? 'Editar Serviço' : 'Novo Serviço'"></h2>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 th:text="${servico.id} != null ? 'Editar Serviço' : 'Novo Serviço'"></h2>
+            <a href="/admin/servicos" class="btn btn-secondary"><i class="fas fa-arrow-left me-1"></i> Voltar</a>
+        </div>
         <form th:action="${servico.id} != null ? @{/admin/servicos/{id}(id=${servico.id})} : @{/admin/servicos}"
               th:object="${servico}" method="post">
 

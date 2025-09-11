@@ -6,7 +6,10 @@
 </head>
 <body>
 <section>
-    <h2 th:text="${usuario.id} != null ? 'Editar Usuário' : 'Novo Usuário'"></h2>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 th:text="${usuario.id} != null ? 'Editar Usuário' : 'Novo Usuário'"></h2>
+        <a href="/admin/usuarios" class="btn btn-secondary"><i class="fas fa-arrow-left me-1"></i> Voltar</a>
+    </div>
     <form th:action="${usuario.id} != null ? @{/admin/usuarios/{id}(id=${usuario.id})} : @{/admin/usuarios}"
           th:object="${usuario}" method="post">
         <input type="hidden" name="_method" th:value="${usuario.id} != null ? 'put' : 'post'" />

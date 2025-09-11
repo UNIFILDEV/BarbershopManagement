@@ -12,7 +12,6 @@
             </a>
         </div>
 
-        <!-- Mensagens de erro -->
         <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
             <i class="fas fa-exclamation-circle me-2"></i>
             <span th:text="${error}"></span>
@@ -30,8 +29,7 @@
                     </div>
                     <div class="card-body">
                         <form th:action="${agendamento != null and agendamento.id != null ? '/admin/agendamentos/' + agendamento.id : '/admin/agendamentos'}" method="post">
-                            
-                            <!-- Cliente -->
+
                             <div class="mb-3">
                                 <label for="clienteId" class="form-label">Cliente *</label>
                                 <select class="form-select" id="clienteId" name="clienteId" required>
@@ -44,7 +42,6 @@
                                 </select>
                             </div>
 
-                            <!-- Serviço -->
                             <div class="mb-3">
                                 <label for="servicoId" class="form-label">Serviço *</label>
                                 <select class="form-select" id="servicoId" name="servicoId" required>
@@ -57,7 +54,6 @@
                                 </select>
                             </div>
 
-                            <!-- Funcionário -->
                             <div class="mb-3">
                                 <label for="funcionarioId" class="form-label">Funcionário *</label>
                                 <select class="form-select" id="funcionarioId" name="funcionarioId" required>
@@ -70,7 +66,6 @@
                                 </select>
                             </div>
 
-                            <!-- Data e Hora -->
                             <div class="mb-3">
                                 <label for="dataHora" class="form-label">Data e Hora *</label>
                                 <input type="datetime-local" 
@@ -83,7 +78,6 @@
                                        required>
                             </div>
 
-                            <!-- Observações -->
                             <div class="mb-3">
                                 <label for="observacoes" class="form-label">Observações</label>
                                 <textarea class="form-control" 
@@ -94,7 +88,6 @@
                                           placeholder="Observações adicionais sobre o agendamento..."></textarea>
                             </div>
 
-                            <!-- Botões -->
                             <div class="d-flex gap-2">
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fas fa-save me-1"></i>
@@ -109,7 +102,6 @@
                 </div>
             </div>
 
-            <!-- Informações adicionais -->
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">
@@ -126,10 +118,6 @@
                         <p class="small text-muted">
                             <i class="fas fa-clock me-1"></i>
                             A duração do serviço será considerada para verificar conflitos de horário.
-                        </p>
-                        <p class="small text-muted">
-                            <i class="fas fa-user me-1"></i>
-                            Apenas funcionários ativos aparecem na lista.
                         </p>
                     </div>
                 </div>
