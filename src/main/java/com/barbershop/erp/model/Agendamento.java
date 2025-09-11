@@ -19,6 +19,11 @@ public class Agendamento {
     @JoinColumn(name = "servico_id")
     private Servico servico;
 
+    // Adicione a referência ao Profissional
+    @ManyToOne
+    @JoinColumn(name = "profissional_id") // Use o nome da coluna da chave estrangeira
+    private Funcionario funcionario;
+
     private LocalDateTime dataHora;
 
     private String status = "AGENDADO"; // AGENDADO, CONCLUIDO, CANCELADO
@@ -31,7 +36,7 @@ public class Agendamento {
     // Construtores
     public Agendamento() {}
 
-    // Getters e os Setters
+    // Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -40,6 +45,10 @@ public class Agendamento {
 
     public Servico getServico() { return servico; }
     public void setServico(Servico servico) { this.servico = servico; }
+
+    // Adicione os getters e setters para o Profissional
+    public Funcionario getFuncionario() { return funcionario; }
+    public void setFuncionario(Funcionario profissional) { this.funcionario = profissional; }
 
     public LocalDateTime getDataHora() { return dataHora; }
     public void setDataHora(LocalDateTime dataHora) { this.dataHora = dataHora; }
