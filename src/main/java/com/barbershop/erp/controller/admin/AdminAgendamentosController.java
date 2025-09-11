@@ -36,7 +36,6 @@ public class AdminAgendamentosController {
     @GetMapping("/{id}")
     public String show(@PathVariable Long id, Model model) {
         Agendamento agendamento = agendamentoService.buscarPorId(id);
-        if (agendamento == null) return "redirect:/admin/agendamentos";
         model.addAttribute("agendamento", agendamento);
         return "admin/agendamentos/show";
     }
