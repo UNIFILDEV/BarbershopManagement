@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="layouts/application :: layout(~{::title}, ~{::section})">
+
+    <title th:text="${agendamento != null and agendamento.id != null ? 'Editar Agendamento - ERP Barbearia' : 'Novo Agendamento - ERP Barbearia'}">Agendamento - ERP Barbearia</title>
+
+    <section>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 th:text="${agendamento != null and agendamento.id != null ? 'Editar Agendamento' : 'Novo Agendamento'}">Agendamento</h1>
+            <a href="/admin/agendamentos" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-1"></i> Voltar
+            </a>
+        </div>
+
+        <!-- Mensagens de erro -->
+        <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>
+            <span th:text="${error}"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-calendar me-2"></i>
+                            Dados do Agendamento
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="${agendamento != null and agendamento.id != null ? '/admin/agendamentos/' + agendamento.id : '/admin/agendamentos'}" method="post">
+                            
+                            <!-- Cliente -->
+                            <div class="mb-3">
+                                <label for="clienteId" class="form-label">Cliente *</label>
+                                <select class="form-select" id="clienteId" name="clienteId" required>
+                                    <option value="">Selecione um cliente</option>
+                                    <option th:each="cliente : ${clientes}" 
+                                            th:value="${cliente.id}" 
+                                            th:text="${cliente.nome + ' (' + cliente.email + ')'}"
+                                            th:selected="${agendamento != null and agendamento.cliente != null and agendamento.cliente.id == cliente.id}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Serviço -->
+                            <div class="mb-3">
+                                <label for="servicoId" class="form-label">Serviço *</label>
+                                <select class="form-select" id="servicoId" name="servicoId" required>
+                                    <option value="">Selecione um serviço</option>
+                                    <option th:each="servico : ${servicos}" 
+                                            th:value="${servico.id}" 
+                                            th:text="${servico.nome + ' - R$ ' + servico.preco + ' (' + servico.duracaoMinutos + ' min)'}"
+                                            th:selected="${agendamento != null and agendamento.servico != null and agendamento.servico.id == servico.id}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Funcionário -->
+                            <div class="mb-3">
+                                <label for="funcionarioId" class="form-label">Funcionário *</label>
+                                <select class="form-select" id="funcionarioId" name="funcionarioId" required>
+                                    <option value="">Selecione um funcionário</option>
+                                    <option th:each="funcionario : ${funcionarios}" 
+                                            th:value="${funcionario.id}" 
+                                            th:text="${funcionario.nome + ' - ' + funcionario.especialidade}"
+                                            th:selected="${agendamento != null and agendamento.alocacoes != null and !agendamento.alocacoes.isEmpty() and agendamento.alocacoes[0].funcionario.id == funcionario.id}">
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Data e Hora -->
+                            <div class="mb-3">
+                                <label for="dataHora" class="form-label">Data e Hora *</label>
+                                <input type="datetime-local" 
+                                       class="form-control" 
+                                       id="dataHora" 
+                                       name="dataHora" 
+                                       th:value="${agendamento != null and agendamento.dataHora != null ? #temporals.format(agendamento.dataHora, 'yyyy-MM-dd') + 'T' + #temporals.format(agendamento.dataHora, 'HH:mm') : ''}"
+                                       pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
+                                       maxlength="16"
+                                       required>
+                            </div>
+
+                            <!-- Observações -->
+                            <div class="mb-3">
+                                <label for="observacoes" class="form-label">Observações</label>
+                                <textarea class="form-control" 
+                                          id="observacoes" 
+                                          name="observacoes" 
+                                          rows="3" 
+                                          th:text="${agendamento != null ? agendamento.observacoes : ''}"
+                                          placeholder="Observações adicionais sobre o agendamento..."></textarea>
+                            </div>
+
+                            <!-- Botões -->
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-1"></i>
+                                    <span th:text="${agendamento != null and agendamento.id != null ? 'Atualizar Agendamento' : 'Criar Agendamento'}">Salvar</span>
+                                </button>
+                                <a href="/admin/agendamentos" class="btn btn-secondary">
+                                    <i class="fas fa-times me-1"></i> Cancelar
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Informações adicionais -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h6 class="mb-0">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Informações
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <p class="small text-muted">
+                            <i class="fas fa-exclamation-triangle me-1"></i>
+                            <strong>Importante:</strong> O sistema verificará automaticamente se o funcionário está disponível no horário selecionado.
+                        </p>
+                        <p class="small text-muted">
+                            <i class="fas fa-clock me-1"></i>
+                            A duração do serviço será considerada para verificar conflitos de horário.
+                        </p>
+                        <p class="small text-muted">
+                            <i class="fas fa-user me-1"></i>
+                            Apenas funcionários ativos aparecem na lista.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Validação para garantir que o ano tenha apenas 4 dígitos
+        document.getElementById('dataHora').addEventListener('input', function(e) {
+            let value = e.target.value;
+            if (value.length > 16) {
+                e.target.value = value.substring(0, 16);
+            }
+            
+            // Verificar se o ano tem exatamente 4 dígitos
+            if (value.length >= 4) {
+                let year = value.substring(0, 4);
+                if (isNaN(year) || year.length !== 4) {
+                    e.target.setCustomValidity('O ano deve ter exatamente 4 dígitos');
+                } else {
+                    e.target.setCustomValidity('');
+                }
+            }
+        });
+
+        // Validação adicional no submit
+        document.querySelector('form').addEventListener('submit', function(e) {
+            let dataHora = document.getElementById('dataHora').value;
+            if (dataHora && dataHora.length !== 16) {
+                e.preventDefault();
+                alert('Por favor, insira uma data e hora válida no formato AAAA-MM-DDTHH:MM');
+                return false;
+            }
+        });
+    </script>
+</th:block>
+</html>

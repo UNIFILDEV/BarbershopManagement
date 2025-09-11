@@ -87,4 +87,29 @@ public class AgendamentoService {
     public void deletar(Long id) {
         agendamentoRepository.deleteById(id);
     }
+
+    @Transactional
+    public Agendamento atualizarAgendamento(Agendamento agendamento) {
+        if (agendamento.getId() == null) {
+            throw new RuntimeException("ID do agendamento é obrigatório para atualização");
+        }
+        
+        Agendamento agendamentoExistente = buscarPorId(agendamento.getId());
+        if (agendamentoExistente == null) {
+            throw new RuntimeException("Agendamento não encontrado");
+        }
+
+        // Verificar se o status permite edição
+        if ("CONCLUIDO".equals(agendamentoExistente.getStatus())) {
+            throw new RuntimeException("Não é possível editar um agendamento concluído");
+        }
+
+        // Atualizar campos
+        agendamentoExistente.setCliente(agendamento.getCliente());
+        agendamentoExistente.setServico(agendamento.getServico());
+        agendamentoExistente.setDataHora(agendamento.getDataHora());
+        agendamentoExistente.setObservacoes(agendamento.getObservacoes());
+
+        return agendamentoRepository.save(agendamentoExistente);
+    }
 }
