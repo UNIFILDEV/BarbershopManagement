@@ -42,7 +42,7 @@ public class DataLoader implements CommandLineRunner {
             cliente.setEmail("cliente@barbearia.com");
             cliente.setSenha(passwordEncoder.encode("123456"));
             cliente.setTipoUsuario(TipoUsuario.CLIENTE);
-            cliente.setTelefone("(11) 99999-0000");
+            cliente.setTelefone("(43) 99999-9999");
             usuarioRepository.save(cliente);
 
             // ========== CRIAR USUÁRIO ADMIN ==========
@@ -51,7 +51,7 @@ public class DataLoader implements CommandLineRunner {
             admin.setEmail("admin@barbearia.com");
             admin.setSenha(passwordEncoder.encode("admin123"));
             admin.setTipoUsuario(TipoUsuario.ADMIN);
-            admin.setTelefone("(11) 99999-0000");
+            admin.setTelefone("(43) 99999-9999");
             usuarioRepository.save(admin);
 
             System.out.println("✅ ADMIN criado: admin@barbearia.com / admin123");
@@ -61,7 +61,7 @@ public class DataLoader implements CommandLineRunner {
             funcionario1.setNome("Primeiro");
             funcionario1.setEmail("primeiro@barbearia.com");
             funcionario1.setSenha(passwordEncoder.encode("123456"));
-            funcionario1.setTelefone("(11) 99999-1111");
+            funcionario1.setTelefone("(43) 99999-9999");
             funcionario1.setEspecialidade("Cortes tradicionais e modernos");
             funcionario1.setAtivo(true);
             funcionarioRepository.save(funcionario1);
@@ -70,7 +70,7 @@ public class DataLoader implements CommandLineRunner {
             funcionario2.setNome("Segundo");
             funcionario2.setEmail("segundo@barbearia.com");
             funcionario2.setSenha(passwordEncoder.encode("123456"));
-            funcionario2.setTelefone("(11) 99999-2222");
+            funcionario2.setTelefone("(43) 99999-9999");
             funcionario2.setEspecialidade("Especialista em barbas");
             funcionario2.setAtivo(true);
             funcionarioRepository.save(funcionario2);
