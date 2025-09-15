@@ -80,8 +80,7 @@ public class ClienteController {
             String email = authentication.getName();
             Usuario usuario = usuarioRepository.findByEmail(email).orElse(null);
 
-            if (usuario instanceof Cliente) {
-                Cliente cliente = (Cliente) usuario;
+            if (usuario instanceof Cliente cliente) { // Use 'cliente' diretamente aqui
                 Servico servico = servicoService.buscarPorId(servicoId);
                 Funcionario funcionario = (Funcionario) usuarioService.buscarPorId(funcionarioId);
 
@@ -92,16 +91,16 @@ public class ClienteController {
                     agendamento.setObservacoes(observacoes);
                 }
 
-                return "redirect:/cliente/dashboard?success";
+                return "redirect:/cliente/agendamentos?success";
             }
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
             model.addAttribute("servicos", servicoService.listarAtivos());
             model.addAttribute("funcionarios", usuarioService.listarFuncionariosAtivos());
-            return "cliente/agendar";
+            return "cliente/agendamentos/form";
         }
 
-        return "redirect:/cliente/dashboard";
+        return "redirect:/cliente/agendamentos";
     }
 
     @PostMapping("/agendamentos/cancelar/{id}")

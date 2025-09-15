@@ -28,19 +28,19 @@
                         </h5>
                     </div>
                     <div class="card-body">
-                        <form th:action="${agendamento != null and agendamento.id != null ? '/cliente/agendamentos/' + agendamento.id : '/cliente/agendamentos'}" method="post">
+                        <form th:action="${agendamento != null and agendamento.id != null ? '/cliente/agendamentos/' + agendamento.id : '/cliente/agendar'}" method="post">
 
-                            <div class="mb-3">
-                                <label for="clienteId" class="form-label">Cliente *</label>
-                                <select class="form-select" id="clienteId" name="clienteId" required>
-                                    <option value="">Selecione um cliente</option>
-                                    <option th:each="cliente : ${clientes}"
-                                            th:value="${cliente.id}"
-                                            th:text="${cliente.nome + ' (' + cliente.email + ')'}"
-                                            th:selected="${agendamento != null and agendamento.cliente != null and agendamento.cliente.id == cliente.id}">
-                                    </option>
-                                </select>
-                            </div>
+<!--                            <div class="mb-3">-->
+<!--                                <label for="clienteId" class="form-label">Cliente *</label>-->
+<!--                                <select class="form-select" id="clienteId" name="clienteId" required>-->
+<!--                                    <option value="">Selecione um cliente</option>-->
+<!--                                    <option th:each="cliente : ${clientes}"-->
+<!--                                            th:value="${cliente.id}"-->
+<!--                                            th:text="${cliente.nome + ' (' + cliente.email + ')'}"-->
+<!--                                            th:selected="${agendamento != null and agendamento.cliente != null and agendamento.cliente.id == cliente.id}">-->
+<!--                                    </option>-->
+<!--                                </select>-->
+<!--                            </div>-->
 
                             <div class="mb-3">
                                 <label for="servicoId" class="form-label">Serviço *</label>
