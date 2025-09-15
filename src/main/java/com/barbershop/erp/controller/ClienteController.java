@@ -54,7 +54,7 @@ public class ClienteController {
             model.addAttribute("agendamentos", agendamentos);
         }
 
-        return "cliente/agendamentos/index";
+        return "cliente/dashboard";
     }
 
     @GetMapping("/agendar")
@@ -87,7 +87,7 @@ public class ClienteController {
                     agendamento.setObservacoes(observacoes);
                 }
 
-                return "redirect:/cliente/agendamentos/index?success";
+                return "redirect:/cliente/dashboard?success";
             }
         } catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
@@ -96,7 +96,7 @@ public class ClienteController {
             return "cliente/agendar";
         }
 
-        return "redirect:/cliente/agendamentos/index";
+        return "redirect:/cliente/dashboard";
     }
 
     @PostMapping("/agendamentos/cancelar/{id}")
