@@ -1,6 +1,7 @@
 package com.barbershop.erp.controller;
 
 import com.barbershop.erp.model.*;
+import com.barbershop.erp.repository.ClienteRepository;
 import com.barbershop.erp.repository.UsuarioRepository;
 import com.barbershop.erp.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class ClienteController {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private ClienteRepository clienteRepository;
 
     @GetMapping("/")
     public String dashboard(Model model, Authentication authentication) {
@@ -61,6 +65,7 @@ public class ClienteController {
     public String agendarForm(Model model) {
         model.addAttribute("servicos", servicoService.listarAtivos());
         model.addAttribute("funcionarios", usuarioService.listarFuncionariosAtivos());
+        model.addAttribute("clientes", clienteRepository.findAll());
         return "cliente/agendamentos/form";
     }
 
